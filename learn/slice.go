@@ -5,7 +5,7 @@ import "fmt"
 import "slices"
 
 func show(label string, ar []int) {
-	fmt.Printf("%s = %v, is nill? %v (len = %d, cap = %d)\n", label, ar, ar == nil, len(ar), cap(ar))
+	fmt.Printf("%s = %v, (len = %d, cap = %d)\n", label, ar, len(ar), cap(ar))
 }
 
 func main() {
