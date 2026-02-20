@@ -1,6 +1,7 @@
 package main
 
 import "fmt"
+import "math"
 
 func exercise01() {
 	fmt.Println("\n# Exercise 1")
@@ -27,17 +28,17 @@ func exercise02() {
 func exercise03() {
 	fmt.Println("\n# Excercise 3")
 
-	var tiny byte = 255
+	var tiny byte = math.MaxUint8
 	fmt.Println("tiny =", tiny)
 	fmt.Println("tiny + 1 =", tiny+1)
 	fmt.Println()
 
-	var small int32 = 2_147_483_647
+	var small int32 = math.MaxInt32
 	fmt.Println("small =", small)
 	fmt.Println("small + 1 =", small+1)
 	fmt.Println()
 
-	var big uint64 = 18_446_744_073_709_551_615
+	var big uint64 = math.MaxUint64
 	fmt.Println("big =", big)
 	fmt.Println("big + 1 =", big+1)
 	fmt.Println()
