@@ -5,7 +5,7 @@ import "fmt"
 import "slices"
 
 func show[S any, T any](label S, ar []T) {
-	fmt.Printf("%v = %v, (len = %d, cap = %d)\n", label, ar, len(ar), cap(ar))
+	fmt.Printf("  %v = %v, (len = %d, cap = %d)\n", label, ar, len(ar), cap(ar))
 }
 
 func create_demo() {
@@ -22,7 +22,7 @@ func create_demo() {
 	show("s2", s2)
 
 	fmt.Println("\n# Compare, s1 == s2 won't work")
-	fmt.Println("s1 == s2?", slices.Equal(s1, s2))
+	fmt.Println("  s1 == s2?", slices.Equal(s1, s2))
 }
 
 func make_demo() {
@@ -54,9 +54,33 @@ func slicing_demo() {
 	show("s[:]", s[:])
 }
 
+func slice_and_append() {
+	fmt.Println("\n# Slice and Append Demo")
+	a := []int{0, 1, 2, 3}
+	b := a[:2]
+	c := a[2:]
+
+	show("a", a)
+	show("b = a[:2]", b)
+	show("c = a[2:]", c)
+
+	fmt.Println("# b = append(b, 20)")
+	b = append(b, 20)
+	show("a", a)
+	show("b", b)
+	show("c", c)
+
+	fmt.Println("# c = append(c, 40, 50)")
+	c = append(c, 40, 50)
+	show("a", a)
+	show("b", b)
+	show("c", c)
+}
+
 func main() {
 	create_demo()
 	make_demo()
 	clear_demo()
 	slicing_demo()
+	slice_and_append()
 }
