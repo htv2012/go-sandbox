@@ -9,8 +9,6 @@ run: fmt check
 	go run . -delete 1
 	go run . -list
 
-
-
 fmt:
 	go fmt .
 
