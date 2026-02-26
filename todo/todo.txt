@@ -1,1 +1,0 @@
-- Move data file to ~/.config/go-todo.json

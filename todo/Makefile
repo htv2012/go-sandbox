@@ -1,5 +1,5 @@
 run: fmt check
-	-rm data.json
+	-rm $(HOME)/.config/todo.json
 	go run . -add "Wash Fido"
 	go run . -add "Wash car"
 	go run . -add "Learn some Go"

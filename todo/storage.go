@@ -3,10 +3,21 @@ package main
 import (
 	"encoding/json"
 	"os"
+	"path/filepath"
 )
 
 type Storage[T any] struct {
 	FileName string
+}
+
+func GetDataPath() (string, error) {
+	home, err := os.UserHomeDir()
+	if err != nil {
+		return "", err
+	}
+
+	absPath := filepath.Join(home, ".config", "todo.json")
+	return absPath, nil
 }
 
 func NewStorage[T any](fileName string) *Storage[T] {
