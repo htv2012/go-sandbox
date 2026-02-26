@@ -45,32 +45,23 @@ func (table *Table) AddRow(row Row) error {
 }
 
 func (table *Table) printTop() {
+	row := []string{}
 	fmt.Print("┌")
-	last := len(table.widths) - 1
-	for i, w := range table.widths {
-		fmt.Print(strings.Repeat("─", w+2))
-		if i == last {
-			fmt.Print("")
-		} else {
-			fmt.Print("┬")
-		}
+	for _, w := range table.widths {
+		row = append(row, strings.Repeat("─", w+2))
 	}
-	fmt.Print("┐")
-	fmt.Println()
+	fmt.Print(strings.Join(row, "┬"))
+	fmt.Println("┐")
 }
 
 func (table *Table) printBottom() {
+	row := []string{}
 	fmt.Print("└")
-	last := len(table.widths) - 1
-	for i, w := range table.widths {
-		fmt.Print(strings.Repeat("─", w+2))
-		if i == last {
-			fmt.Print("┘")
-		} else {
-			fmt.Print("┴")
-		}
+	for _, w := range table.widths {
+		row = append(row, strings.Repeat("─", w+2))
 	}
-	fmt.Println()
+	fmt.Print(strings.Join(row, "┴"))
+	fmt.Println("┘")
 }
 
 func (table *Table) printHeader() {
@@ -83,16 +74,13 @@ func (table *Table) printHeader() {
 }
 
 func (table *Table) printDivider() {
+	row := []string{}
 	fmt.Print("├")
-	last := len(table.widths) - 1
-	for i, w := range table.widths {
-		fmt.Print(strings.Repeat("─", w+2))
-		if i == last {
-			fmt.Print("┤")
-		} else {
-			fmt.Print("┼")
-		}
+	for _, w := range table.widths {
+		row = append(row, strings.Repeat("─", w+2))
 	}
+	fmt.Print(strings.Join(row, "┼"))
+	fmt.Print("┤")
 	fmt.Println()
 }
 
@@ -113,12 +101,4 @@ func (table *Table) Print() {
 		table.printRow(row)
 	}
 	table.printBottom()
-}
-
-func tableDemo() {
-	table := NewTable()
-	table.AddHeader([]string{"#", "Task", "Done"})
-	table.AddRow([]string{"1", "Wash Fido", "x"})
-	table.AddRow([]string{"2", "Grocery Shopping", "v"})
-	table.Print()
 }

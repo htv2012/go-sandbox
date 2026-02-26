@@ -16,6 +16,20 @@ type Todo struct {
 
 type Todos []Todo
 
+func (todo Todo) CreateTableRow(index int) []string {
+	row := []string{}
+	row = append(row, strconv.Itoa(index))
+	row = append(row, todo.Title)
+	row = append(row, todo.CreatedAt.Format(time.RFC1123))
+	if todo.Completed {
+		completedAt := todo.CompletedAt.Format(time.RFC1123)
+		row = append(row, "Yes", completedAt)
+	} else {
+		row = append(row, "No", "")
+	}
+	return row
+}
+
 func (todos *Todos) add(title string) {
 	todo := Todo{
 		Title:     title,
@@ -69,21 +83,11 @@ func (todos *Todos) edit(index int, title string) error {
 	return nil
 }
 
-func (todos *Todos) print() {
+func (todos *Todos) Print() {
 	table := NewTable()
-	table.AddHeader([]string{"#", "Task", "Completed", "Created On", "Completed On"})
+	table.AddHeader([]string{"#", "Task", "Created On", "Completed", "Completed On"})
 	for index, t := range *todos {
-		completed := "No"
-		completedAt := ""
-
-		if t.Completed {
-			completed = "Yes"
-			if t.CompletedAt != nil {
-				completedAt = t.CompletedAt.Format(time.RFC1123)
-			}
-		}
-
-		table.AddRow([]string{strconv.Itoa(index), t.Title, completed, t.CreatedAt.Format(time.RFC1123), completedAt})
+		table.AddRow(t.CreateTableRow(index))
 	}
 
 	table.Print()
