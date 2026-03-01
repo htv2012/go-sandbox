@@ -1,0 +1,32 @@
+info:
+  name: GetAllEmpty
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{root}}"
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("Verify Code", function () {
+                expect(res.getStatus()).to.equal(200);
+            }
+        );
+
+        test("Verify Body", function() {
+              const body = res.getBody()
+              expect(body).to.satisfy(val) -> {
+                return val == null || (Array.isArray(val) && val.length === 0);
+              }, "Expect body to be null or empty"
+          }
+        );
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -33,9 +33,10 @@ func createMovie(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	var movie Movie
 	json.NewDecoder(r.Body).Decode(&movie)
-	movie.ID = strconv.Itoa(rand.Intn(100000))
+	movie.ID = strconv.Itoa(rand.Intn(100))
+	w.WriteHeader(http.StatusCreated)
 	movies = append(movies, movie)
-	json.NewEncoder(w).Encode(movie)
+	json.NewEncoder(w).Encode(movie.ID)
 }
 
 func getMovie(w http.ResponseWriter, r *http.Request) {
@@ -98,18 +99,6 @@ func deleteMovie(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	movies = append(movies, Movie{
-		ID:       "1",
-		Isbn:     "43210",
-		Title:    "One Live",
-		Director: &Director{FirstName: "John", LastName: "Doe"},
-	})
-	movies = append(movies, Movie{
-		ID:    "2",
-		Isbn:  "32110",
-		Title: "Just the Two of Us",
-	})
-
 	r := mux.NewRouter()
 	r.HandleFunc("/movies", getMovies).Methods("GET")
 	r.HandleFunc("/movies", createMovie).Methods("POST")

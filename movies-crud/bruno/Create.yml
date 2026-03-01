@@ -13,12 +13,8 @@ http:
     type: json
     data: |-
       {
-        "isbn": "99955",
-        "title": "Sans Famille",
-        "director": {
-          "firstname": "Alexander",
-          "lastname": "Dunn"
-        }
+        "isbn": "199955",
+        "title": "Once More"
       }
   auth: inherit
 

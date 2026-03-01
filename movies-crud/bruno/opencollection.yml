@@ -2,6 +2,22 @@ opencollection: 1.0.0
 
 info:
   name: Movies
+config:
+  proxy:
+    inherit: true
+    config:
+      protocol: http
+      hostname: ""
+      port: ""
+      auth:
+        username: ""
+        password: ""
+      bypassProxy: ""
+
+request:
+  variables:
+    - name: root
+      value: http://localhost:8000/movies
 bundled: false
 extensions:
   bruno:

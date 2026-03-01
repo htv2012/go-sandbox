@@ -1,0 +1,31 @@
+info:
+  name: CreateMovieWithoutDirector
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{root}}"
+  body:
+    type: json
+    data: |
+      {
+        "isbn": "1001",
+        "title": "Silence of the Clams"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("Verify Code", function() {
+          expect(res.getStatus()).to.equal(201);
+        }
+        );
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

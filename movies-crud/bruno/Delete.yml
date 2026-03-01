@@ -5,7 +5,7 @@ info:
 
 http:
   method: DELETE
-  url: http://localhost:8000/movies/96728
+  url: "{{root}}/74933"
   auth: inherit
 
 settings:
