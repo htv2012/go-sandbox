@@ -1,3 +1,5 @@
 run:
-	go build -o /tmp/bin -gcflags="-m" heap_escape.go
+	go fmt ./...
+	go vet ./...
+	go build -o /tmp/bin -gcflags="-m" main.go
 	/tmp/bin/heap_escape
