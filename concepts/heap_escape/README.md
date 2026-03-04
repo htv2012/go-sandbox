@@ -65,16 +65,33 @@ While Go manages this automatically, "heap escapes" have a performance cost:
 
 ## How to See It in Action
 
-You don't have to guess what the compiler is doing. You can ask it directly using the -m flag:
-
-    go build -gcflags="-m" main.go
-
-This will output lines like:
+Here is the output when running `make`:
 
 ```
-./main.go:10:2: x escapes to heap
+go build -o /tmp/bin -gcflags="-m" heap_escape.go
+# command-line-arguments
+./heap_escape.go:11:6: can inline NewPerson
+./heap_escape.go:15:6: can inline NewPersonP
+./heap_escape.go:20:16: inlining call to NewPerson
+./heap_escape.go:21:13: inlining call to fmt.Println
+./heap_escape.go:23:18: inlining call to NewPersonP
+./heap_escape.go:24:13: inlining call to fmt.Println
+./heap_escape.go:11:16: leaking param: first to result ~r0 level=0
+./heap_escape.go:11:30: leaking param: last to result ~r0 level=0
+./heap_escape.go:15:17: leaking param: first
+./heap_escape.go:15:31: leaking param: last
+./heap_escape.go:16:9: &Person{...} escapes to heap
+./heap_escape.go:21:13: ... argument does not escape
+./heap_escape.go:21:14: "Person:" escapes to heap
+./heap_escape.go:21:25: p escapes to heap
+./heap_escape.go:23:18: &Person{...} does not escape
+./heap_escape.go:24:13: ... argument does not escape
+./heap_escape.go:24:14: "Person2:" escapes to heap
+./heap_escape.go:24:26: *pp escapes to heap
+/tmp/bin/heap_escape
+Person: {Anna Karenina 27}
+Person2: {Ken Thompson 81}
 ```
-
 
 ## Summary Table
 
