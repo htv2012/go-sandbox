@@ -13,5 +13,4 @@ type Team struct {
 func (t Team) Print() {
 	members := strings.Join(t.Members, ", ")
 	fmt.Printf("- Team %s: %s\n", t.Name, members)
-
 }
