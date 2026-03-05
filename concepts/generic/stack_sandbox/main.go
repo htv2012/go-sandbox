@@ -24,6 +24,11 @@ func main() {
 	stringStack.Push("Mary")
 	stringStack.Push("Paul")
 	stringStack.Push("Peter")
+
+	fmt.Println("Is Paul in stack?", stringStack.Contains("Paul"))
+	fmt.Println("Is John in stack?", stringStack.Contains("John"))
+	fmt.Println()
+
 	fmt.Println("Pop string stack")
 	for _, trial := range []int{1, 2, 3, 4} {
 		fmt.Printf("%d. ", trial)
@@ -33,7 +38,6 @@ func main() {
 		} else {
 			fmt.Println("END")
 		}
-
 	}
 
 }
