@@ -20,7 +20,7 @@ func main() {
 	league.MatchResult("Blue Beluga", 12, "Happy Clam", 2)
 	league.MatchResult("Blue Beluga", 26, "Angry Flounder", 11)
 
-	fmt.Println("\nROSTER")
+	fmt.Println("\nTEAMS")
 	for _, team := range league.Teams {
 		team.Print()
 	}
