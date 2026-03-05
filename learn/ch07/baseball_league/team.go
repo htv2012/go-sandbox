@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 type Team struct {
 	Name    string
@@ -8,10 +11,7 @@ type Team struct {
 }
 
 func (t Team) Print() {
-	// fmt.Println()
-	fmt.Println("- Team", t.Name)
-	for _, name := range t.Members {
-		fmt.Println("  -", name)
-	}
+	members := strings.Join(t.Members, ", ")
+	fmt.Printf("- Team %s: %s\n", t.Name, members)
 
 }

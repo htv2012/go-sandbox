@@ -25,10 +25,9 @@ func main() {
 		team.Print()
 	}
 
-	fmt.Println("\nSCORE TEAM")
-	fmt.Println("----- ----")
+	fmt.Println("\nSCORES")
 	for team, score := range league.Wins {
-		fmt.Printf("%5d %s\n", score, team)
+		fmt.Printf("%d %s\n", score, team)
 
 	}
 	fmt.Println("\nRANKING")
