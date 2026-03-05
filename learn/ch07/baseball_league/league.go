@@ -1,10 +1,28 @@
 package main
 
-import "slices"
+import (
+	"io"
+	"slices"
+	"strconv"
+)
 
 type League struct {
 	Teams []Team
 	Wins  map[string]int
+}
+
+type Ranker interface {
+	Ranking() []string
+}
+
+func RankPrinter(ranker Ranker, writer io.Writer) {
+	teams := ranker.Ranking()
+	for rank, team := range teams {
+		writer.Write([]byte(strconv.Itoa(rank + 1)))
+		writer.Write([]byte(". "))
+		writer.Write([]byte(team))
+		writer.Write([]byte("\n"))
+	}
 }
 
 func (l *League) AddTeam(t Team) {
