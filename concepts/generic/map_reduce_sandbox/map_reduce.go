@@ -15,3 +15,13 @@ func Reduce[T1, T2 any](s []T1, initializer T2, f func(T2, T1) T2) T2 {
 	}
 	return r
 }
+
+func Filter[T any](s []T, f func(s T) bool) []T {
+	var out []T
+	for _, v := range s {
+		if f(v) {
+			out = append(out, v)
+		}
+	}
+	return out
+}
