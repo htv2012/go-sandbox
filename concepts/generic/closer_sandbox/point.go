@@ -11,11 +11,8 @@ type Point3D struct {
 	X, Y, Z int
 }
 
-func (p Point2D) GoString() string {
-	return fmt.Sprintf("(%d, %d)", p.X, p.Y)
-}
 func (p Point2D) String() string {
-	return p.GoString()
+	return fmt.Sprintf("(%d, %d)", p.X, p.Y)
 }
 
 func (p1 Point2D) Diff(p2 Point2D) float64 {
