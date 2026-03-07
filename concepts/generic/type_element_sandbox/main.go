@@ -2,6 +2,7 @@ package main
 
 import "fmt"
 import "errors"
+import "reflect"
 
 type Integer interface {
 	int | int8 | int16 | int32 | int64 | uint | uint8 | uint16 | uint32 | uint64 | uintptr
@@ -14,24 +15,22 @@ func divMod[T Integer](numerator, denominator T) (T, T, error) {
 	return numerator / denominator, numerator % denominator, nil
 }
 
+func demo[T int | int8 | int16 | int32 | int64 | uint | uint8 | uint16 | uint32 | uint64](num, dem T) {
+	a, b, err := divMod(num, dem)
+	typeName := reflect.TypeOf(num).Kind()
+
+	fmt.Printf("divMod[%s](%d, %d) -> ", typeName, num, dem)
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Printf("%d, %d\n", a, b)
+	}
+}
+
 func main() {
-	fmt.Println("divMod Demo")
-
-	tests := [][]uint{
-		{15, 5},
-		{15, 2},
-		{15, 0},
-	}
-
-	for _, pair := range tests {
-		num := pair[0]
-		dem := pair[1]
-		a, b, err := divMod(num, dem)
-		fmt.Printf("  divMod(%d, %d) -> ", num, dem)
-		if err != nil {
-			fmt.Println(err)
-		} else {
-			fmt.Printf("%d, %d\n", a, b)
-		}
-	}
+	fmt.Println("# divMod Demo")
+	demo(-15, -2)
+	demo[uint](15, 2)
+	demo[uint64](15, 0)
+	fmt.Println()
 }
