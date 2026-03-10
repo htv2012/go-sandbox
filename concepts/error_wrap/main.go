@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"os"
 )
@@ -8,7 +9,7 @@ import (
 func fileChecker(name string) error {
 	f, err := os.Open(name)
 	if err != nil {
-		return fmt.Errorf("%s -> %s", name, err)
+		return fmt.Errorf("%s -> %w", name, err)
 	}
 	f.Close()
 	return nil
@@ -17,7 +18,13 @@ func fileChecker(name string) error {
 func demoFileChecker(name string) {
 	err := fileChecker(name)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Print(err)
+
+		// unwrap. For demo only. In practice, use errors.Is and errors.As
+		if wrapped := errors.Unwrap(err); wrapped != nil {
+			fmt.Printf(" [%s]", wrapped)
+		}
+		fmt.Println()
 	} else {
 		fmt.Printf("%s -> OK\n", name)
 	}
