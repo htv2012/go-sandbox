@@ -1,35 +1,16 @@
 package main
 
-import (
-	"errors"
-	"fmt"
-	"os"
-)
+import "fmt"
 
-func FileCheck(name string) error {
-	f, err := os.Open(name)
-	if err != nil {
-		return fmt.Errorf("%s -> %w", name, err)
-	}
-	f.Close()
-	return nil
-}
-
-func DemoFileCheck(name string) {
-	err := FileCheck(name)
-	if err == nil {
-		fmt.Println(name, "-> OK")
-		return
-	}
-
-	if errors.Is(err, os.ErrNotExist) {
-		fmt.Println(name, "-> does not exist")
-	} else if errors.Is(err, os.ErrPermission) {
-		fmt.Println(name, "-> permission denied")
-	}
-}
 func main() {
-	DemoFileCheck("main.go")
-	DemoFileCheck("foo.bar")
-	DemoFileCheck("/etc/sudoers")
+	fmt.Println()
+	IsDemo("main.go")
+	IsDemo("foo.bar")
+	IsDemo("/etc/sudoers")
+
+	fmt.Println()
+	CustomIsDemo(101, 102)
+	CustomIsDemo(102, 101)
+
+	fmt.Println()
 }
